@@ -72,15 +72,66 @@
       color: var(--primary);
       margin-bottom: 1rem;
     }
-    .project-card {
+    /* Styles for the project cards and other new sections */
+    .project-card, .skill-card, .testimonial-card {
       background: rgba(0, 0, 0, 0.05); /* Slightly transparent black for a subtle card background */
-      padding: 1rem 1.5rem;
+      padding: 1.5rem;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.05);
       transition: box-shadow 0.3s;
+      margin-bottom: 1.5rem; /* Spacing between cards */
     }
-    .project-card:hover {
+    .project-card:hover, .skill-card:hover, .testimonial-card:hover {
       box-shadow: 0 0 25px rgba(0,0,0,0.15); /* More pronounced shadow on hover */
+    }
+    .project-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    .skill-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        text-align: center;
+    }
+    .skill-card {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100px;
+    }
+    .skill-card img {
+        width: 40px; /* Adjust icon size */
+        height: 40px;
+        margin-bottom: 0.5rem;
+    }
+    .achievements-list ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    .achievements-list li {
+        margin-bottom: 0.75rem;
+        padding-left: 1.5rem;
+        position: relative;
+    }
+    .achievements-list li:before {
+        content: "🏆"; /* Trophy icon */
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .testimonial-card p {
+        font-style: italic;
+        margin-bottom: 0.5rem;
+    }
+    .testimonial-card .author {
+        text-align: right;
+        font-weight: 600;
+        color: var(--primary);
     }
     footer {
       text-align: center;
@@ -116,12 +167,42 @@
     a.button:hover {
       background: #005f99; /* A darker shade of blue for hover */
     }
+    #hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center content horizontally */
+        text-align: center;
+    }
+    #hero img.profile-photo {
+        width: 150px; /* Adjust size as needed */
+        height: 150px;
+        border-radius: 50%; /* Makes it a circle */
+        object-fit: cover;
+        margin-bottom: 1.5rem;
+        border: 4px solid var(--primary); /* A nice border */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    #hero h1 {
+      font-size: 2.5rem; /* Larger for hero */
+      margin-bottom: 0.75rem;
+    }
     #hero p {
       font-size: 1.25rem;
       margin-top: 0.5rem;
       min-height: 1.5rem; /* Ensures consistent height for typing effect */
       font-weight: 500;
       color: var(--text);
+    }
+    @media (max-width: 768px) {
+        #hero h1 {
+            font-size: 2rem;
+        }
+        #hero p {
+            font-size: 1rem;
+        }
+        .skill-grid {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
     }
     @media (max-width: 600px) {
       nav a {
@@ -135,6 +216,9 @@
       .toggle-btn {
         margin-top: 0.5rem;
       }
+      .container {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -143,7 +227,10 @@
     <div><strong>Dev Verma</strong></div>
     <nav>
       <a href="#about">About</a>
-      <a href="#project">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#testimonials">Testimonials</a>
       <a href="#contact">Connect</a>
       <button class="toggle-btn" aria-label="Toggle dark mode" onclick="toggleTheme()">🌓</button>
     </nav>
@@ -151,31 +238,151 @@
 
   <div class="container">
     <section id="hero" class="visible">
+      <img src="https://via.placeholder.com/150" alt="Dev Verma's Profile Photo" class="profile-photo">
       <h1>Dev Verma: Bringing Digital Visions to Life.</h1>
       <p id="typing"></p>
+      <a href="#projects" class="button">View My Work</a>
+      <a href="#contact" class="button">Get in Touch</a>
     </section>
+
+    ---
 
     <section id="about">
       <h2>About Me: The Architect Behind Your Ideas</h2>
-      <p>I'm Dev Verma, a **passionate student developer** driven by a singular goal: to transform innovative concepts into **seamless, high-performing web and mobile applications**. My approach is grounded in creating solutions that aren't just functional, but genuinely enhance user experience and drive real-world impact.</p>
-      <p>I thrive on tackling complex challenges, constantly refining my craft, and diving deep into new technologies to build robust and intuitive digital products. My commitment is to deliver clean, efficient, and user-centric code that stands the test of time.</p>
-      <p><strong>My versatile toolkit includes:</strong> HTML, CSS, JavaScript, Firebase, Git, Java, and Android Development. I'm always expanding my knowledge to meet diverse project needs.</p>
+      <p>I'm Dev Verma, a **passionate student developer** based in Indore, Madhya Pradesh, India. I'm driven by a singular goal: to transform innovative concepts into **seamless, high-performing web and mobile applications**. My approach is grounded in creating solutions that aren't just functional, but genuinely enhance user experience and drive real-world impact.</p>
+      <p>I thrive on tackling complex challenges, constantly refining my craft, and diving deep into new technologies to build robust and intuitive digital products. My commitment is to deliver clean, efficient, and user-centric code that stands the test of time, ensuring scalability and maintainability.</p>
+      <p>My philosophy is simple: **understand the problem deeply, design with the user in mind, and build with precision.** I believe in collaborative environments where ideas flourish and innovative solutions come to life.</p>
+      <p>Outside the realm of code, I find inspiration in [**Your Hobby/Interest Here**] which fuels my creativity and strategic thinking. This holistic approach empowers me to bring a fresh perspective to every project.</p>
     </section>
 
-    <section id="project">
-      <h2>Featured Project: Maatrikaa – Where Concept Meets Code</h2>
+    ---
+
+    <section id="skills">
+        <h2>My Toolkit: Skills That Drive Innovation</h2>
+        <p>Leveraging a versatile set of technologies to build robust and intuitive applications:</p>
+        <div class="skill-grid">
+            <div class="skill-card">
+                <h3>HTML5</h3>
+            </div>
+            <div class="skill-card">
+                <h3>CSS3</h3>
+            </div>
+            <div class="skill-card">
+                <h3>JavaScript</h3>
+            </div>
+            <div class="skill-card">
+                <h3>Firebase</h3>
+            </div>
+            <div class="skill-card">
+                <h3>Firestore</h3>
+            </div>
+            <div class="skill-card">
+                <h3>Java</h3>
+            </div>
+            <div class="skill-card">
+                <h3>Android Dev</h3>
+            </div>
+            <div class="skill-card">
+                <h3>Git</h3>
+            </div>
+            <div class="skill-card">
+                <h3>GitHub</h3>
+            </div>
+            </div>
+    </section>
+
+    ---
+
+    <section id="projects">
+      <h2>My Projects: Building Solutions, Delivering Impact</h2>
+      <p>Here's a selection of projects where I've transformed ideas into functional digital experiences:</p>
+
+      <h3>Featured Project: Maatrikaa – Where Concept Meets Code</h3>
       <div class="project-card">
         <p>**Maatrikaa** isn't just a website; it's a testament to crafting a complete digital presence. As my flagship project, this e-commerce platform for a handmade organic soap brand demonstrates my end-to-end development capabilities – from **responsive design** to **robust backend integration**.</p>
         <ul>
           <li>🧼 Engineered a **visually stunning and intuitive UI** that adapts flawlessly across all devices.</li>
           <li>🌙 Implemented a dynamic **dark mode toggle** to enhance user comfort and accessibility.</li>
-          <li>📱 Designed with a **mobile-first strategy** to ensure a perfect experience on any smartphone or tablet.</li>
+          <li>📱 Designed with a **mobile-first strategy** to ensure a perfect experience on smartphones and tablets.</li>
           <li>🔗 Leveraged **Firebase for a scalable backend** and **Firestore for efficient, real-time data management**, ensuring smooth operations.</li>
           <li>📷 Developed an engaging **product showcase with interactive image cards**, making product discovery a delight.</li>
         </ul>
         <a class="button" href="https://github.com/Dev11verma/Maatrikaa" target="_blank" rel="noopener">Explore the Code on GitHub</a>
+        </div>
+
+      <h3>Other Key Projects</h3>
+
+      <div class="project-card">
+        <h4>[Project Title 1 Here]</h4>
+        <p>[**Problem/Goal:** Briefly describe the problem this project solved or its main objective. E.g., "Developed a mobile app to help students track their study hours efficiently."]</p>
+        <p>[**Your Role:** Detail your specific contributions. E.g., "Led the frontend development, implemented user authentication, and integrated data visualization charts."]</p>
+        <p><strong>Technologies:</strong> [List technologies used, e.g., HTML, CSS, JavaScript, Node.js, MongoDB]</p>
+        <ul>
+          <li>[**Key Feature 1:** Briefly describe a key feature and its benefit.]</li>
+          <li>[**Key Feature 2:** Briefly describe another key feature and its benefit.]</li>
+          </ul>
+        <a class="button" href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+      <div class="project-card">
+        <h4>[Project Title 2 Here]</h4>
+        <p>[**Problem/Goal:** Briefly describe the problem this project solved or its main objective.]</p>
+        <p>[**Your Role:** Detail your specific contributions.]</p>
+        <p><strong>Technologies:</strong> [List technologies used]</p>
+        <ul>
+          <li>[**Key Feature 1**]</li>
+          <li>[**Key Feature 2**]</li>
+        </ul>
+        <a class="button" href="https://github.com/orgs/community/discussions/63960" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+
+      </section>
+
+    ---
+
+    <section id="achievements">
+      <h2>Achievements & Certifications: My Commitment to Growth</h2>
+      <p>Beyond coding, my dedication to excellence and continuous learning is reflected in various areas:</p>
+
+      <h3>Academic & Professional Milestones</h3>
+      <div class="achievements-list">
+        <ul>
+          <li>🏆 [**Academic Achievement 1:** e.g., Dean's List for consistently high academic performance (Year)]</li>
+          <li>🏆 [**Academic Achievement 2:** e.g., Awarded 'Best Project' for the [Project Name] in [Course/Competition Name] (Year)]</li>
+          <li>🏆 [**Certification 1:** e.g., Certified JavaScript Developer - [Issuing Body] (Year)]</li>
+          <li>🏆 [**Certification 2:** e.g., Completed Google Firebase Course - Coursera (Year)]</li>
+          <li>🏆 [**Hackathon/Competition:** e.g., Participated in [Hackathon Name], developing [Brief Project Idea] (Year)]</li>
+          </ul>
+      </div>
+
+      <h3>Sports Achievements: Discipline, Teamwork & Performance</h3>
+      <div class="achievements-list">
+        <ul>
+          <li>🏆 **Martial Arts Excellence:** Achieved **Brown Belt in Karate**, a testament to rigorous discipline and perseverance. Honored with **Gold, Silver, and Bronze medals** in various regional championships.</li>
+          <li>🏆 **Basketball Prowess:** Represented [Your State Name] at the **State Level**, [Your District Name] at the **District Level**, and proudly played as a **National Player** in Basketball, showcasing strong teamwork, strategic thinking, and high-performance under pressure.</li>
+        </ul>
       </div>
     </section>
+
+    ---
+
+    <section id="testimonials">
+      <h2>Voices of Confidence: What People Say About My Work</h2>
+      <p>I'm proud of the positive feedback I've received from mentors, professors, and collaborators:</p>
+
+      <div class="testimonial-card">
+        <p>"[**Quote 1:** Dev is an exceptionally quick learner and problem-solver. His dedication to clean code and his ability to grasp complex concepts quickly make him a valuable asset to any team.]"</p>
+        <p class="author">- [Name of Person 1], [Title/Relation, e.g., Professor of Computer Science]</p>
+      </div>
+
+      <div class="testimonial-card">
+        <p>"[**Quote 2:** Collaborating with Dev on [Project Name] was a pleasure. He consistently delivered high-quality work, communicated effectively, and showed great initiative in overcoming challenges. Highly recommended!]"</p>
+        <p class="author">- [Name of Person 2], [Title/Relation, e.g., Project Lead]</p>
+      </div>
+
+      </section>
+
+    ---
 
     <section id="contact">
       <h2>Ready to Create Something Amazing Together?</h2>
@@ -183,7 +390,12 @@
       <p>Reach out directly:</p>
       <p>Email: <strong><span id="email"></span></strong></p>
       <p>Connect on GitHub: <a href="https://github.com/Dev11verma" target="_blank" rel="noopener">@Dev11verma</a></p>
-    </section>
+      <p>Connect on LinkedIn: <a href="[Your LinkedIn Profile URL Here]" target="_blank" rel="noopener">Dev Verma on LinkedIn</a></p>
+
+      <h3 style="margin-top: 2rem;">My Resume: A Deeper Dive Into My Experience</h3>
+      <p>For a comprehensive overview of my professional and academic background, feel free to download my resume:</p>
+      <a class="button" href="https://www.reddit.com/r/GetEmployed/comments/n6ktxf/resume_tip_when_you_submit_a_resume_name_it_as/" target="_blank" rel="noopener">Download My Resume (PDF)</a>
+      </section>
   </div>
 
   <footer>
@@ -218,6 +430,8 @@
       sections.forEach(section => {
         // Offset by 60px to account for the sticky header
         const sectionTop = section.offsetTop - 60;
+        // Check if the top of the section is visible in the viewport
+        // and if it's past the previous section
         if (pageYOffset >= sectionTop) {
           currentSection = section.getAttribute('id');
         }
@@ -234,20 +448,17 @@
     // Fade in sections on scroll for a dynamic effect
     function revealOnScroll() {
       sections.forEach(section => {
-        // Get position relative to viewport
         const sectionTop = section.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
-        // If section is within 100px of the viewport bottom, make it visible
-        if (sectionTop < windowHeight - 100) {
+        if (sectionTop < windowHeight - 100) { /* Adjust '100' for when the animation triggers */
           section.classList.add('visible');
         }
       });
     }
-    // Listen for scroll and load events to trigger the animation
     window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll); // Also run on load to show initial visible sections
+    window.addEventListener('load', revealOnScroll); // Also run on load for initial visibility
 
-    // Typing effect for hero intro for an engaging welcome
+    // Typing effect for hero intro
     const typingText = "As a Web & App Developer, I turn complex ideas into intuitive digital realities. Let's build your next success story!";
     const typingElement = document.getElementById('typing');
     let charIndex = 0;
@@ -255,12 +466,18 @@
       if (charIndex < typingText.length) {
         typingElement.textContent += typingText.charAt(charIndex);
         charIndex++;
-        setTimeout(typeWriter, 70); // Slightly faster typing speed
+        setTimeout(typeWriter, 70);
+      } else {
+        // Optional: Reset and re-type after a delay
+        // setTimeout(() => {
+        //   typingElement.textContent = '';
+        //   charIndex = 0;
+        //   typeWriter();
+        // }, 5000); // Wait 5 seconds before re-typing
       }
     }
-    // Start typing effect on page load
     window.addEventListener('load', () => {
-      typingElement.textContent = ''; // Clear any pre-existing text
+      typingElement.textContent = '';
       charIndex = 0;
       typeWriter();
     });
