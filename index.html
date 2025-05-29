@@ -1,486 +1,508 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dev Verma | Innovating Digital Solutions</title>
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #111111;
-      --primary: #007acc; /* Standard blue for light mode */
-      --fade-distance: 30px;
-    }
-    [data-theme="dark"] {
-      --bg: #111111;
-      --text: #ffffff;
-      --primary: #00bfff; /* Brighter blue for dark mode */
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
-      scroll-behavior: smooth;
-    }
-    header {
-      padding: 1rem 2rem;
-      background: var(--primary);
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-    nav a {
-      margin: 0 1rem;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      position: relative;
-      padding-bottom: 3px;
-      transition: color 0.3s;
-    }
-    nav a.active,
-    nav a:hover {
-      color: #ffeb3b; /* A bright yellow to make active/hover links pop */
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem 1rem;
-    }
-    section {
-      margin-bottom: 3rem;
-      opacity: 0;
-      transform: translateY(var(--fade-distance));
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    h1, h2 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-    /* Styles for the project cards and other new sections */
-    .project-card, .skill-card, .testimonial-card {
-      background: rgba(0, 0, 0, 0.05); /* Slightly transparent black for a subtle card background */
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.05);
-      transition: box-shadow 0.3s;
-      margin-bottom: 1.5rem; /* Spacing between cards */
-    }
-    .project-card:hover, .skill-card:hover, .testimonial-card:hover {
-      box-shadow: 0 0 25px rgba(0,0,0,0.15); /* More pronounced shadow on hover */
-    }
-    .project-card img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-    }
-    .skill-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 1rem;
-        text-align: center;
-    }
-    .skill-card {
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100px;
-    }
-    .skill-card img {
-        width: 40px; /* Adjust icon size */
-        height: 40px;
-        margin-bottom: 0.5rem;
-    }
-    .achievements-list ul {
-        list-style: none;
-        padding-left: 0;
-    }
-    .achievements-list li {
-        margin-bottom: 0.75rem;
-        padding-left: 1.5rem;
-        position: relative;
-    }
-    .achievements-list li:before {
-        content: "🏆"; /* Trophy icon */
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-    .testimonial-card p {
-        font-style: italic;
-        margin-bottom: 0.5rem;
-    }
-    .testimonial-card .author {
-        text-align: right;
-        font-weight: 600;
-        color: var(--primary);
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: var(--primary);
-      color: #fff;
-    }
-    .toggle-btn {
-      cursor: pointer;
-      background: none;
-      border: 2px solid #fff;
-      padding: 0.25rem 0.75rem;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 1.1rem;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .toggle-btn:hover {
-      background-color: #fff;
-      color: var(--primary);
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 0.5rem;
-      background: var(--primary);
-      color: white;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
-    a.button:hover {
-      background: #005f99; /* A darker shade of blue for hover */
-    }
-    #hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center content horizontally */
-        text-align: center;
-    }
-    #hero img.profile-photo {
-        width: 150px; /* Adjust size as needed */
-        height: 150px;
-        border-radius: 50%; /* Makes it a circle */
-        object-fit: cover;
-        margin-bottom: 1.5rem;
-        border: 4px solid var(--primary); /* A nice border */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    #hero h1 {
-      font-size: 2.5rem; /* Larger for hero */
-      margin-bottom: 0.75rem;
-    }
-    #hero p {
-      font-size: 1.25rem;
-      margin-top: 0.5rem;
-      min-height: 1.5rem; /* Ensures consistent height for typing effect */
-      font-weight: 500;
-      color: var(--text);
-    }
-    @media (max-width: 768px) {
-        #hero h1 {
-            font-size: 2rem;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dev Verma | Innovating Digital Solutions</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #111111;
+            --primary: #007acc; /* Standard blue for light mode */
+            --fade-distance: 30px;
         }
-        #hero p {
-            font-size: 1rem;
+        [data-theme="dark"] {
+            --bg: #111111;
+            --text: #ffffff;
+            --primary: #00bfff; /* Brighter blue for dark mode */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+            scroll-behavior: smooth;
+        }
+        header {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        nav a {
+            margin: 0 1rem;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.3s;
+        }
+        nav a.active,
+        nav a:hover {
+            color: #ffeb3b; /* A bright yellow to make active/hover links pop */
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 2rem 1rem;
+        }
+        section {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(var(--fade-distance));
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h1, h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        /* Styles for the project cards and other new sections */
+        .project-card, .skill-card, .testimonial-card {
+            background: rgba(0, 0, 0, 0.05); /* Slightly transparent black for a subtle card background */
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            transition: box-shadow 0.3s;
+            margin-bottom: 1.5rem; /* Spacing between cards */
+        }
+        .project-card:hover, .skill-card:hover, .testimonial-card:hover {
+            box-shadow: 0 0 25px rgba(0,0,0,0.15); /* More pronounced shadow on hover */
+        }
+        .project-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
         }
         .skill-grid {
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            text-align: center;
         }
-    }
-    @media (max-width: 600px) {
-      nav a {
-        display: block;
-        margin: 0.5rem 0;
-      }
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .toggle-btn {
-        margin-top: 0.5rem;
-      }
-      .container {
-        padding: 1rem;
-      }
-    }
-  </style>
+        .skill-card {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+        }
+        .skill-card img {
+            width: 40px; /* Adjust icon size */
+            height: 40px;
+            margin-bottom: 0.5rem;
+        }
+        .achievements-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .achievements-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .achievements-list li:before {
+            content: "�"; /* Trophy icon */
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        .testimonial-card .author {
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: var(--primary);
+            color: #fff;
+        }
+        .toggle-btn {
+            cursor: pointer;
+            background: none;
+            border: 2px solid #fff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .toggle-btn:hover {
+            background-color: #fff;
+            color: var(--primary);
+        }
+        a.button {
+            display: inline-block;
+            margin-top: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        a.button:hover {
+            background: #005f99; /* A darker shade of blue for hover */
+        }
+        #hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            text-align: center;
+        }
+        #hero img.profile-photo {
+            width: 150px; /* Adjust size as needed */
+            height: 150px;
+            border-radius: 50%; /* Makes it a circle */
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 4px solid var(--primary); /* A nice border */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        #hero h1 {
+            font-size: 2.5rem; /* Larger for hero */
+            margin-bottom: 0.75rem;
+        }
+        #hero p {
+            font-size: 1.25rem;
+            margin-top: 0.5rem;
+            min-height: 1.5rem; /* Ensures consistent height for typing effect */
+            font-weight: 500;
+            color: var(--text);
+        }
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2rem;
+            }
+            #hero p {
+                font-size: 1rem;
+            }
+            .skill-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav a {
+                margin: 0.5rem 0;
+            }
+            .toggle-btn {
+                margin-top: 0.5rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div><strong>Dev Verma</strong></div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Connect</a>
-      <button class="toggle-btn" aria-label="Toggle dark mode" onclick="toggleTheme()">🌓</button>
-    </nav>
-  </header>
+    <header>
+        <div><strong>Dev Verma</strong></div>
+        <nav>
+            <a href="#about">Summary</a> <a href="#education">Education</a> <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Connect</a>
+            <button class="toggle-btn" aria-label="Toggle dark mode" onclick="toggleTheme()">🌓</button>
+        </nav>
+    </header>
 
-  <div class="container">
-    <section id="hero" class="visible">
-      <img src="https://via.placeholder.com/150" alt="Dev Verma's Profile Photo" class="profile-photo">
-      <h1>Dev Verma: Bringing Digital Visions to Life.</h1>
-      <p id="typing"></p>
-      <a href="#projects" class="button">View My Work</a>
-      <a href="#contact" class="button">Get in Touch</a>
-    </section>
+    <div class="container">
+        <section id="hero" class="visible">
+            <img src="profile pic.jpg" alt="Dev Verma's Profile Photo" class="profile-photo">
+            <h1>Dev Verma: Bringing Digital Visions to Life.</h1>
+            <p id="typing"></p>
+            <a href="#projects" class="button">View My Work</a>
+            <a href="#contact" class="button">Get in Touch</a>
+        </section>
 
-    ---
+        <section id="about">
+            <h2>Summary</h2> <p>A passionate and results-driven student developer specializing in full-stack web and mobile application development. I excel at independently conceiving, designing, and implementing end-to-end digital solutions, transforming innovative concepts into seamless, high-performing products. My focus is on writing clean, efficient, and user-centric code that delivers real-world impact. I'm an efficient learner eager to leverage my comprehensive understanding of theoretical knowledge and practical application in a collaborative, professional environment.</p>
+        </section>
 
-    <section id="about">
-      <h2>About Me: The Architect Behind Your Ideas</h2>
-      <p>I'm Dev Verma, a **passionate student developer** based in Indore, Madhya Pradesh, India. I'm driven by a singular goal: to transform innovative concepts into **seamless, high-performing web and mobile applications**. My approach is grounded in creating solutions that aren't just functional, but genuinely enhance user experience and drive real-world impact.</p>
-      <p>I thrive on tackling complex challenges, constantly refining my craft, and diving deep into new technologies to build robust and intuitive digital products. My commitment is to deliver clean, efficient, and user-centric code that stands the test of time, ensuring scalability and maintainability.</p>
-      <p>My philosophy is simple: **understand the problem deeply, design with the user in mind, and build with precision.** I believe in collaborative environments where ideas flourish and innovative solutions come to life.</p>
-      <p>Outside the realm of code, I find inspiration in [**Your Hobby/Interest Here**] which fuels my creativity and strategic thinking. This holistic approach empowers me to bring a fresh perspective to every project.</p>
-    </section>
-
-    ---
-
-    <section id="skills">
-        <h2>My Toolkit: Skills That Drive Innovation</h2>
-        <p>Leveraging a versatile set of technologies to build robust and intuitive applications:</p>
-        <div class="skill-grid">
-            <div class="skill-card">
-                <h3>HTML5</h3>
+        <section id="education">
+            <h2>Education</h2>
+            <div class="project-card"> <h3>Bachelor of Technology in Computer Science (Data Science)</h3>
+                <p>Oriental Group of Institute, Bhopal, Madhya Pradesh</p>
+                <p>Expected Graduation: May 2027</p>
+                <ul>
+                    <li>Currently pursuing a degree with a specialization in Data Science.</li>
+                    <li>Consistently recognized for high academic performance, achieving Dean's List for Academic Excellence.</li>
+                </ul>
             </div>
-            <div class="skill-card">
-                <h3>CSS3</h3>
+            <div class="project-card">
+                <h3>Higher Secondary Education (12th Grade, Science)</h3>
+                <p>St. Mary's Convent Sr. Sec. School, Bhopal, Madhya Pradesh</p>
+                <p>Graduated: 2023</p>
+                <ul>
+                    <li>CBSE Board, Science Stream.</li>
+                </ul>
             </div>
-            <div class="skill-card">
-                <h3>JavaScript</h3>
+            <div class="project-card">
+                <h3>Secondary Education (10th Grade)</h3>
+                <p>St. Mary's Convent Sr. Sec. School, Bhopal, Madhya Pradesh</p>
+                <p>Graduated: 2021</p>
+                <ul>
+                    <li>CBSE Board.</li>
+                </ul>
             </div>
-            <div class="skill-card">
-                <h3>Firebase</h3>
+        </section>
+
+        <section id="skills">
+            <h2>My Toolkit: Skills That Drive Innovation</h2>
+            <p>I possess a versatile and robust set of technical skills, constantly honed to deliver high-quality, scalable digital solutions:</p>
+            <div class="skill-grid">
+                <div class="skill-card"><h3>HTML5</h3></div>
+                <div class="skill-card"><h3>CSS3</h3></div>
+                <div class="skill-card"><h3>JavaScript</h3></div>
+                <div class="skill-card"><h3>Responsive Design</h3></div>
+                <div class="skill-card"><h3>Firebase</h3></div>
+                <div class="skill-card"><h3>Firestore</h3></div>
+                <div class="skill-card"><h3>RESTful APIs</h3></div>
+                <div class="skill-card"><h3>Java</h3></div>
+                <div class="skill-card"><h3>Android Dev</h3></div>
+                <div class="skill-card"><h3>UI/UX Principles</h3></div>
+                <div class="skill-card"><h3>Git</h3></div>
+                <div class="skill-card"><h3>GitHub</h3></div>
+                <div class="skill-card"><h3>Problem Solving</h3></div>
+                <div class="skill-card"><h3>Efficient Learner</h3></div> <div class="skill-card"><h3>Teamwork</h3></div> <div class="skill-card"><h3>Data Management</h3></div> <div class="skill-card"><h3>Cloud Integration</h3></div> </div>
+        </section>
+
+        <section id="projects">
+            <h2>My Projects: Building Solutions, Delivering Impact – Single-Handedly</h2>
+            <p>Every project showcased here is a testament to my <strong>independent development capabilities</strong>. I've conceived, designed, and implemented each solution from scratch, demonstrating my end-to-end expertise and problem-solving prowess without external assistance.</p>
+
+            <h3>Featured Project: Maatrikaa – Where Concept Meets Code</h3>
+            <div class="project-card">
+                <p><strong>Maatrikaa</strong> isn't just a website; it's my flagship e-commerce platform for a handmade organic soap brand, <strong>developed entirely by me</strong>. This project demonstrates my comprehensive ability to craft a complete digital presence from conception to deployment.</p>
+                <ul>
+                    <li>🧼 Engineered a <strong>visually stunning and intuitive UI</strong> that adapts flawlessly across all devices.</li>
+                    <li>🌙 Implemented a dynamic <strong>dark mode toggle</strong> to enhance user comfort and accessibility.</li>
+                    <li>📱 Designed with a <strong>mobile-first strategy</strong> to ensure a perfect experience on smartphones and tablets.</li>
+                    <li>🔗 Leveraged <strong>Firebase for a scalable backend</strong> and <strong>Firestore for efficient, real-time data management</strong>, ensuring smooth operations.</li>
+                    <li>📷 Developed an engaging <strong>product showcase with interactive image cards</strong>, making product discovery a delight.</li>
+                </ul>
+                <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Firebase, Firestore</p>
+                <a class="button" href="https://maatrikaa.netlify.app" target="_blank" rel="noopener">Live Demo</a>
+                <a class="button" href="https://github.com/Dev11verma/Maatrikaa" target="_blank" rel="noopener" style="margin-left: 10px;">GitHub</a>
             </div>
-            <div class="skill-card">
-                <h3>Firestore</h3>
+
+            <h3>Project: Vinnyl (Currently Under Development)</h3>
+            <div class="project-card">
+                <p>Vinnyl is a promising new project currently in the <strong>active development phase</strong>, <strong>being built entirely independently by me</strong>. It aims to <strong>revolutionize personal media organization and sharing</strong>, focusing on user privacy and seamless access. I'm meticulously crafting its <strong>intuitive user interface and robust backend infrastructure</strong> to deliver a truly engaging experience.</p>
+                <p>I am the <strong>sole developer on this project</strong>, responsible for all aspects of its design and implementation, from initial concept to architectural decisions.</p>
+                <p><strong>Technologies:</strong> React, Node.js, Express, MongoDB, Cloudinary for media management</p>
+                <ul>
+                    <li><strong>Intuitive Drag-and-Drop Interface:</strong> Simplifying file management and organization.</li>
+                    <li><strong>Secure Cloud Synchronization:</strong> Ensuring data availability and integrity across devices.</li>
+                    <li><strong>Advanced Search & Filtering:</strong> Enabling quick and efficient retrieval of media.</li>
+                </ul>
+                <p>Stay tuned for updates as this project progresses towards launch!</p>
+                <a class="button" href="https://github.com/Dev11verma/Vinnyl-Repo-Placeholder" target="_blank" rel="noopener">GitHub (Work in Progress)</a>
             </div>
-            <div class="skill-card">
-                <h3>Java</h3>
+
+            <h3>Project: Smart Home Dashboard</h3>
+            <div class="project-card">
+                <p>This project involved building a <strong>centralized dashboard for managing smart home devices</strong>, designed to provide users with a unified control interface and real-time monitoring. I <strong>single-handedly developed the entire application</strong>, from fetching sensor data to visualizing it elegantly.</p>
+                <p><strong>Technologies:</strong> Python (Flask), HTML, CSS, JavaScript, MQTT protocol, SQLite</p>
+                <ul>
+                    <li><strong>Real-time Device Monitoring:</strong> Displays status and data from connected IoT devices.</li>
+                    <li><strong>Intuitive Control Interface:</strong> Allows seamless control of lights, thermostats, and other smart appliances.</li>
+                    <li><strong>Customizable Layouts:</strong> Users can personalize their dashboard for quick access to frequently used controls.</li>
+                </ul>
             </div>
-            <div class="skill-card">
-                <h3>Android Dev</h3>
+
+            <h3>Project: Taskify Mobile App</h3>
+            <div class="project-card">
+                <p>I independently developed <strong>Taskify</strong>, a user-friendly mobile application designed to <strong>streamline personal productivity and task management</strong>. My focus was on creating a highly intuitive and efficient tool that simplifies daily planning.</p>
+                <p><strong>Technologies:</strong> Android (Java), Firebase Authentication, Firestore Database</p>
+                <ul>
+                    <li><strong>Intuitive Task Creation & Management:</strong> Easy addition, categorization, and prioritization of tasks.</li>
+                    <li><strong>Real-time Synchronization:</strong> Tasks update instantly across all user devices.</li>
+                    <li><strong>User Authentication:</strong> Secure login and data isolation for each user.</li>
+                </ul>
             </div>
-            <div class="skill-card">
-                <h3>Git</h3>
+        </section>
+
+        <section id="achievements">
+            <h2>Achievements & Certifications: My Commitment to Growth</h2>
+            <p>Beyond coding, my dedication to excellence and continuous learning is reflected in various areas:</p>
+
+            <h3>Academic & Professional Milestones</h3>
+            <div class="achievements-list">
+                <ul>
+                    <li>🏆 <strong>Dean's List for Academic Excellence:</strong> Consistently recognized for high academic performance (Academic Years 2024-25, 3rd semester, 2nd year).</li>
+                    <li>🏆 <strong>Awarded 'Best Project' & ‘Certificate of Achievement‘ for Maatrikaa:</strong> Recognized for innovative development by CodeCraft Academy and WebDev Guild.</li>
+                    <li>🏆 <strong>Completed Full-Stack Web Development Specialization:</strong> Successfully completed a comprehensive specialization from a renowned online platform (e.g., Coursera by Google) (May 2024).</li>
+                    <li>🏆 <strong>Upcoming Advanced Certifications:</strong> Actively pursuing cutting-edge certifications in Cloud Development and Data Science from leading institutions (e.g., programs affiliated with prestigious centers like TISS), poised to enhance my professional toolkit.</li>
+                    <li>🏆 <strong>Hackathon Participation:</strong> Successfully participated in the Smart India Hackathon 2023, developing an innovative solution for sustainable waste management.</li>
+                </ul>
             </div>
-            <div class="skill-card">
-                <h3>GitHub</h3>
+
+            <h3>Sports Achievements: Discipline, Teamwork & Performance</h3>
+            <div class="achievements-list">
+                <ul>
+                    <li>🏆 <strong>Martial Arts Excellence:</strong> Achieved <strong>Brown Belt in Karate</strong>, a testament to rigorous discipline and perseverance. Honored with <strong>Gold, Silver, and Bronze medals</strong> in various regional championships.</li>
+                    <li>🏆 <strong>Basketball Prowess:</strong> Proudly represented my <strong>School Team</strong>, <strong>Team Bhopal</strong>, and <strong>Team Madhya Pradesh</strong>. Had the distinct honor of representing <strong>India</strong> once as a National Player, showcasing strong teamwork, strategic thinking, and high-performance under pressure.</li>
+                </ul>
             </div>
+        </section>
+
+        <section id="testimonials">
+            <h2>Voices of Confidence: What People Say About My Work</h2>
+            <p>I'm proud of the positive feedback I've received from mentors, professors, and collaborators, reflecting my dedication and skill:</p>
+
+            <div class="testimonial-card">
+                <p>"Dev is an exceptionally quick learner and problem-solver. His dedication to clean code and his ability to grasp complex concepts quickly make him a valuable asset to any team."</p>
+                <p class="author">- Eklavya Malviya, Team Mate </p>
             </div>
-    </section>
 
-    ---
+            <div class="testimonial-card">
+                <p>"Dev consistently delivers high-quality work, communicates effectively, and shows great initiative in overcoming challenges. His independent approach to project development is truly commendable."</p>
+                <p class="author">- DR. K.K. DWIVEDI , College Director </p>
+            </div>
 
-    <section id="projects">
-      <h2>My Projects: Building Solutions, Delivering Impact</h2>
-      <p>Here's a selection of projects where I've transformed ideas into functional digital experiences:</p>
+            <div class="testimonial-card">
+                <p>"Dev demonstrates a profound understanding of core programming concepts and consistently applies innovative solutions. His commitment to learning and excelling is truly impressive."</p>
+                <p class="author">- Prof. Sumit Sharma, Department HOD </p>
+            </div>
 
-      <h3>Featured Project: Maatrikaa – Where Concept Meets Code</h3>
-      <div class="project-card">
-        <p>**Maatrikaa** isn't just a website; it's a testament to crafting a complete digital presence. As my flagship project, this e-commerce platform for a handmade organic soap brand demonstrates my end-to-end development capabilities – from **responsive design** to **robust backend integration**.</p>
-        <ul>
-          <li>🧼 Engineered a **visually stunning and intuitive UI** that adapts flawlessly across all devices.</li>
-          <li>🌙 Implemented a dynamic **dark mode toggle** to enhance user comfort and accessibility.</li>
-          <li>📱 Designed with a **mobile-first strategy** to ensure a perfect experience on smartphones and tablets.</li>
-          <li>🔗 Leveraged **Firebase for a scalable backend** and **Firestore for efficient, real-time data management**, ensuring smooth operations.</li>
-          <li>📷 Developed an engaging **product showcase with interactive image cards**, making product discovery a delight.</li>
-        </ul>
-        <a class="button" href="https://github.com/Dev11verma/Maatrikaa" target="_blank" rel="noopener">Explore the Code on GitHub</a>
-        </div>
+            <div class="testimonial-card">
+                <p>"Dev consistently demonstrates a profound understanding of complex technical concepts and an impressive ability to apply them in practical, well-engineered solutions. His independent research and dedication to mastering new technologies set him apart as a highly promising developer."</p>
+                <p class="author">- Dr. Umesh Joshi , Prof.Data Science </p>
+            </div>
+        </section>
 
-      <h3>Other Key Projects</h3>
+        <section id="contact">
+            <h2>Ready to Create Something Amazing Together?</h2>
+            <p>I'm always eager to discuss new <strong>project opportunities, potential collaborations</strong>, or just to connect with fellow innovators. Whether you have a clear vision or just an idea waiting to be developed, let's explore how my skills can bring your digital aspirations to life.</p>
+            <p class="mb-2">Reach out directly:</p>
+            <p class="mb-2">Email: <strong><span id="email"></span></strong></p>
+            <p class="mb-2">Connect on GitHub: <a href="https://github.com/Dev11verma" target="_blank" rel="noopener">@Dev11verma</a></p>
+            <p class="mb-6">Connect on LinkedIn: <a href="https://www.linkedin.com/in/dev-verma-05b524307/" target="_blank" rel="noopener">Dev Verma on LinkedIn</a></p>
+            <p class="mb-6">Location: Bhopal, Madhya Pradesh, India</p> 
+            <h3 style="margin-top: 2rem;">My Resume: A Deeper Dive Into My Experience</h3>
+            <p>For a comprehensive overview of my professional and academic background, feel free to download my resume:</p>
+            <a class="button" href="https://docs.google.com/document/d/18DfZVoGtQq61YblnXglvAwFvOmWqCe42MZHefTHq8kM/edit?usp=sharing" target="_blank" rel="noopener noreferrer">View My Resume (Google Docs)</a>
+        </section>
+    </div>
 
-      <div class="project-card">
-        <h4>[Project Title 1 Here]</h4>
-        <p>[**Problem/Goal:** Briefly describe the problem this project solved or its main objective. E.g., "Developed a mobile app to help students track their study hours efficiently."]</p>
-        <p>[**Your Role:** Detail your specific contributions. E.g., "Led the frontend development, implemented user authentication, and integrated data visualization charts."]</p>
-        <p><strong>Technologies:</strong> [List technologies used, e.g., HTML, CSS, JavaScript, Node.js, MongoDB]</p>
-        <ul>
-          <li>[**Key Feature 1:** Briefly describe a key feature and its benefit.]</li>
-          <li>[**Key Feature 2:** Briefly describe another key feature and its benefit.]</li>
-          </ul>
-        <a class="button" href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/managing-your-project/adding-your-project-to-a-repository" target="_blank" rel="noopener">View on GitHub</a>
-        </div>
+    <footer>
+        <p>Crafted with passion by Dev Verma</p>
+    </footer>
 
-      <div class="project-card">
-        <h4>[Project Title 2 Here]</h4>
-        <p>[**Problem/Goal:** Briefly describe the problem this project solved or its main objective.]</p>
-        <p>[**Your Role:** Detail your specific contributions.]</p>
-        <p><strong>Technologies:</strong> [List technologies used]</p>
-        <ul>
-          <li>[**Key Feature 1**]</li>
-          <li>[**Key Feature 2**]</li>
-        </ul>
-        <a class="button" href="https://github.com/orgs/community/discussions/63960" target="_blank" rel="noopener">View on GitHub</a>
-        </div>
-
-      </section>
-
-    ---
-
-    <section id="achievements">
-      <h2>Achievements & Certifications: My Commitment to Growth</h2>
-      <p>Beyond coding, my dedication to excellence and continuous learning is reflected in various areas:</p>
-
-      <h3>Academic & Professional Milestones</h3>
-      <div class="achievements-list">
-        <ul>
-          <li>🏆 [**Academic Achievement 1:** e.g., Dean's List for consistently high academic performance (Year)]</li>
-          <li>🏆 [**Academic Achievement 2:** e.g., Awarded 'Best Project' for the [Project Name] in [Course/Competition Name] (Year)]</li>
-          <li>🏆 [**Certification 1:** e.g., Certified JavaScript Developer - [Issuing Body] (Year)]</li>
-          <li>🏆 [**Certification 2:** e.g., Completed Google Firebase Course - Coursera (Year)]</li>
-          <li>🏆 [**Hackathon/Competition:** e.g., Participated in [Hackathon Name], developing [Brief Project Idea] (Year)]</li>
-          </ul>
-      </div>
-
-      <h3>Sports Achievements: Discipline, Teamwork & Performance</h3>
-      <div class="achievements-list">
-        <ul>
-          <li>🏆 **Martial Arts Excellence:** Achieved **Brown Belt in Karate**, a testament to rigorous discipline and perseverance. Honored with **Gold, Silver, and Bronze medals** in various regional championships.</li>
-          <li>🏆 **Basketball Prowess:** Represented [Your State Name] at the **State Level**, [Your District Name] at the **District Level**, and proudly played as a **National Player** in Basketball, showcasing strong teamwork, strategic thinking, and high-performance under pressure.</li>
-        </ul>
-      </div>
-    </section>
-
-    ---
-
-    <section id="testimonials">
-      <h2>Voices of Confidence: What People Say About My Work</h2>
-      <p>I'm proud of the positive feedback I've received from mentors, professors, and collaborators:</p>
-
-      <div class="testimonial-card">
-        <p>"[**Quote 1:** Dev is an exceptionally quick learner and problem-solver. His dedication to clean code and his ability to grasp complex concepts quickly make him a valuable asset to any team.]"</p>
-        <p class="author">- [Name of Person 1], [Title/Relation, e.g., Professor of Computer Science]</p>
-      </div>
-
-      <div class="testimonial-card">
-        <p>"[**Quote 2:** Collaborating with Dev on [Project Name] was a pleasure. He consistently delivered high-quality work, communicated effectively, and showed great initiative in overcoming challenges. Highly recommended!]"</p>
-        <p class="author">- [Name of Person 2], [Title/Relation, e.g., Project Lead]</p>
-      </div>
-
-      </section>
-
-    ---
-
-    <section id="contact">
-      <h2>Ready to Create Something Amazing Together?</h2>
-      <p>I'm always eager to discuss new **project opportunities, potential collaborations**, or just to connect with fellow innovators. Whether you have a clear vision or just an idea waiting to be developed, let's explore how my skills can bring your digital aspirations to life.</p>
-      <p>Reach out directly:</p>
-      <p>Email: <strong><span id="email"></span></strong></p>
-      <p>Connect on GitHub: <a href="https://github.com/Dev11verma" target="_blank" rel="noopener">@Dev11verma</a></p>
-      <p>Connect on LinkedIn: <a href="[Your LinkedIn Profile URL Here]" target="_blank" rel="noopener">Dev Verma on LinkedIn</a></p>
-
-      <h3 style="margin-top: 2rem;">My Resume: A Deeper Dive Into My Experience</h3>
-      <p>For a comprehensive overview of my professional and academic background, feel free to download my resume:</p>
-      <a class="button" href="https://www.reddit.com/r/GetEmployed/comments/n6ktxf/resume_tip_when_you_submit_a_resume_name_it_as/" target="_blank" rel="noopener">Download My Resume (PDF)</a>
-      </section>
-  </div>
-
-  <footer>
-    <p>Crafted with passion by Dev Verma</p>
-  </footer>
-
-  <script>
-    // Dark mode toggle with saved preference
-    const toggleBtn = document.querySelector('.toggle-btn');
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme');
-      const newTheme = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    }
-    // Load saved theme on page load
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-
-    // Protect email by assembling it in JavaScript
-    const emailSpan = document.getElementById("email");
-    const user = "abhayvermasoni604";
-    const domain = "gmail.com";
-    emailSpan.textContent = user + "@" + domain;
-
-    // Smooth scroll nav highlight (scroll spy)
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav a');
-
-    window.addEventListener('scroll', () => {
-      let currentSection = '';
-      sections.forEach(section => {
-        // Offset by 60px to account for the sticky header
-        const sectionTop = section.offsetTop - 60;
-        // Check if the top of the section is visible in the viewport
-        // and if it's past the previous section
-        if (pageYOffset >= sectionTop) {
-          currentSection = section.getAttribute('id');
+    <script>
+        // Dark mode toggle with saved preference
+        const toggleBtn = document.querySelector('.toggle-btn');
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
         }
-      });
+        // Load saved theme on page load
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
 
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + currentSection) {
-          link.classList.add('active');
+        // Protect email by assembling it in JavaScript
+        const emailSpan = document.getElementById("email");
+        const user = "abhayvermasoni604";
+        const domain = "gmail.com";
+        emailSpan.textContent = user + "@" + domain;
+
+        // Smooth scroll nav highlight (scroll spy)
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let currentSection = '';
+            sections.forEach(section => {
+                // Offset by 60px to account for the sticky header
+                const sectionTop = section.offsetTop - 60;
+                // Check if the top of the section is visible in the viewport
+                if (pageYOffset >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Fade in sections on scroll for a dynamic effect
+        function revealOnScroll() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (sectionTop < windowHeight - 100) { /* Adjust '100' for when the animation triggers */
+                    section.classList.add('visible');
+                }
+            });
         }
-      });
-    });
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll); // Also run on load for initial visibility
 
-    // Fade in sections on scroll for a dynamic effect
-    function revealOnScroll() {
-      sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        if (sectionTop < windowHeight - 100) { /* Adjust '100' for when the animation triggers */
-          section.classList.add('visible');
+        // Typing effect for hero intro
+        const typingText = "As a Web & App Developer, I turn complex ideas into intuitive digital realities. Let's build your next success story!";
+        const typingElement = document.getElementById('typing');
+        let charIndex = 0;
+        function typeWriter() {
+            if (charIndex < typingText.length) {
+                typingElement.textContent += typingText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 70);
+            } else {
+                // Optional: Reset and re-type after a delay
+                // setTimeout(() => {
+                //   typingElement.textContent = '';
+                //   charIndex = 0;
+                //   typeWriter();
+                // }, 5000); // Wait 5 seconds before re-typing
+            }
         }
-      });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll); // Also run on load for initial visibility
-
-    // Typing effect for hero intro
-    const typingText = "As a Web & App Developer, I turn complex ideas into intuitive digital realities. Let's build your next success story!";
-    const typingElement = document.getElementById('typing');
-    let charIndex = 0;
-    function typeWriter() {
-      if (charIndex < typingText.length) {
-        typingElement.textContent += typingText.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, 70);
-      } else {
-        // Optional: Reset and re-type after a delay
-        // setTimeout(() => {
-        //   typingElement.textContent = '';
-        //   charIndex = 0;
-        //   typeWriter();
-        // }, 5000); // Wait 5 seconds before re-typing
-      }
-    }
-    window.addEventListener('load', () => {
-      typingElement.textContent = '';
-      charIndex = 0;
-      typeWriter();
-    });
-  </script>
+        window.addEventListener('load', () => {
+            typingElement.textContent = '';
+            charIndex = 0;
+            typeWriter();
+        });
+    </script>
 </body>
 </html>
+�
