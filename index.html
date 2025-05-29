@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dev Verma | Innovating Digital Solutions</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --primary: #007acc; /* Standard blue for light mode */
+      --fade-distance: 30px;
+    }
+    [data-theme="dark"] {
+      --bg: #111111;
+      --text: #ffffff;
+      --primary: #00bfff; /* Brighter blue for dark mode */
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      scroll-behavior: smooth;
+    }
+    header {
+      padding: 1rem 2rem;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    nav a {
+      margin: 0 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.3s;
+    }
+    nav a.active,
+    nav a:hover {
+      color: #ffeb3b; /* A bright yellow to make active/hover links pop */
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    section {
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(var(--fade-distance));
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h1, h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .project-card {
+      background: rgba(0, 0, 0, 0.05); /* Slightly transparent black for a subtle card background */
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      transition: box-shadow 0.3s;
+    }
+    .project-card:hover {
+      box-shadow: 0 0 25px rgba(0,0,0,0.15); /* More pronounced shadow on hover */
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--primary);
+      color: #fff;
+    }
+    .toggle-btn {
+      cursor: pointer;
+      background: none;
+      border: 2px solid #fff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 1.1rem;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .toggle-btn:hover {
+      background-color: #fff;
+      color: var(--primary);
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    a.button:hover {
+      background: #005f99; /* A darker shade of blue for hover */
+    }
+    #hero p {
+      font-size: 1.25rem;
+      margin-top: 0.5rem;
+      min-height: 1.5rem; /* Ensures consistent height for typing effect */
+      font-weight: 500;
+      color: var(--text);
+    }
+    @media (max-width: 600px) {
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .toggle-btn {
+        margin-top: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong>Dev Verma</strong></div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#project">Projects</a>
+      <a href="#contact">Connect</a>
+      <button class="toggle-btn" aria-label="Toggle dark mode" onclick="toggleTheme()">🌓</button>
+    </nav>
+  </header>
+
+  <div class="container">
+    <section id="hero" class="visible">
+      <h1>Dev Verma: Bringing Digital Visions to Life.</h1>
+      <p id="typing"></p>
+    </section>
+
+    <section id="about">
+      <h2>About Me: The Architect Behind Your Ideas</h2>
+      <p>I'm Dev Verma, a **passionate student developer** driven by a singular goal: to transform innovative concepts into **seamless, high-performing web and mobile applications**. My approach is grounded in creating solutions that aren't just functional, but genuinely enhance user experience and drive real-world impact.</p>
+      <p>I thrive on tackling complex challenges, constantly refining my craft, and diving deep into new technologies to build robust and intuitive digital products. My commitment is to deliver clean, efficient, and user-centric code that stands the test of time.</p>
+      <p><strong>My versatile toolkit includes:</strong> HTML, CSS, JavaScript, Firebase, Git, Java, and Android Development. I'm always expanding my knowledge to meet diverse project needs.</p>
+    </section>
+
+    <section id="project">
+      <h2>Featured Project: Maatrikaa – Where Concept Meets Code</h2>
+      <div class="project-card">
+        <p>**Maatrikaa** isn't just a website; it's a testament to crafting a complete digital presence. As my flagship project, this e-commerce platform for a handmade organic soap brand demonstrates my end-to-end development capabilities – from **responsive design** to **robust backend integration**.</p>
+        <ul>
+          <li>🧼 Engineered a **visually stunning and intuitive UI** that adapts flawlessly across all devices.</li>
+          <li>🌙 Implemented a dynamic **dark mode toggle** to enhance user comfort and accessibility.</li>
+          <li>📱 Designed with a **mobile-first strategy** to ensure a perfect experience on any smartphone or tablet.</li>
+          <li>🔗 Leveraged **Firebase for a scalable backend** and **Firestore for efficient, real-time data management**, ensuring smooth operations.</li>
+          <li>📷 Developed an engaging **product showcase with interactive image cards**, making product discovery a delight.</li>
+        </ul>
+        <a class="button" href="https://github.com/Dev11verma/Maatrikaa" target="_blank" rel="noopener">Explore the Code on GitHub</a>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Ready to Create Something Amazing Together?</h2>
+      <p>I'm always eager to discuss new **project opportunities, potential collaborations**, or just to connect with fellow innovators. Whether you have a clear vision or just an idea waiting to be developed, let's explore how my skills can bring your digital aspirations to life.</p>
+      <p>Reach out directly:</p>
+      <p>Email: <strong><span id="email"></span></strong></p>
+      <p>Connect on GitHub: <a href="https://github.com/Dev11verma" target="_blank" rel="noopener">@Dev11verma</a></p>
+    </section>
+  </div>
+
+  <footer>
+    <p>Crafted with passion by Dev Verma</p>
+  </footer>
+
+  <script>
+    // Dark mode toggle with saved preference
+    const toggleBtn = document.querySelector('.toggle-btn');
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+    // Load saved theme on page load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Protect email by assembling it in JavaScript
+    const emailSpan = document.getElementById("email");
+    const user = "abhayvermasoni604";
+    const domain = "gmail.com";
+    emailSpan.textContent = user + "@" + domain;
+
+    // Smooth scroll nav highlight (scroll spy)
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    window.addEventListener('scroll', () => {
+      let currentSection = '';
+      sections.forEach(section => {
+        // Offset by 60px to account for the sticky header
+        const sectionTop = section.offsetTop - 60;
+        if (pageYOffset >= sectionTop) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + currentSection) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Fade in sections on scroll for a dynamic effect
+    function revealOnScroll() {
+      sections.forEach(section => {
+        // Get position relative to viewport
+        const sectionTop = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        // If section is within 100px of the viewport bottom, make it visible
+        if (sectionTop < windowHeight - 100) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    // Listen for scroll and load events to trigger the animation
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll); // Also run on load to show initial visible sections
+
+    // Typing effect for hero intro for an engaging welcome
+    const typingText = "As a Web & App Developer, I turn complex ideas into intuitive digital realities. Let's build your next success story!";
+    const typingElement = document.getElementById('typing');
+    let charIndex = 0;
+    function typeWriter() {
+      if (charIndex < typingText.length) {
+        typingElement.textContent += typingText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 70); // Slightly faster typing speed
+      }
+    }
+    // Start typing effect on page load
+    window.addEventListener('load', () => {
+      typingElement.textContent = ''; // Clear any pre-existing text
+      charIndex = 0;
+      typeWriter();
+    });
+  </script>
+</body>
+</html>
