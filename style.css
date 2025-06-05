@@ -1,0 +1,49 @@
+/* Fullscreen Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 200; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain; /* Ensure the image fits within the modal without cropping */
+}
+.modal.open {
+    display: flex; /* Show when open */
+}
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.close-modal:hover,
+.close-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+#hero img.profile-photo {
+    /* ... existing styles ... */
+    cursor: pointer; /* Add a pointer cursor to indicate it's clickable */
+    transition: transform 0.2s ease-in-out; /* Add a subtle hover effect */
+}
+#hero img.profile-photo:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
